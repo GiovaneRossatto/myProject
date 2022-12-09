@@ -9,20 +9,23 @@ var userList = []
 app.set('views', './views');
 app.set("view engine", "pug");
 
-// app.get("/users-form", (reg, res) => {
-//     fs.readFile(__dirname + "/form.html", "utf8", (err, text) =>
-//     {
-//     res.send(text);
-//     });
-//     });
+app.use(bodyParser.urlencoded({
+    extended: false
+}))
+app.use(bodyParser.json())
 
-app.get('/pug', (req, res) => {
+
+app.get('/users-form', (req, res) => {
     res.render('index')
 })
 
 app.post('/submit', (req, res) => {
     userList.push(req.body)
     console.log(userList);
+})
+
+app.get("/user-list", (req, res) => {
+    res.send(userList)
 })
 
 
